@@ -42,6 +42,13 @@ class ADXL345
         /* Power options functions */
         void powerOn();
         void powerOff();
+ 
+        /* Sensor core functionalities configuration functions */
+        void setDataRate(float dataRate);
+        float getDataRate();
+
+        void setFullScaleRange(uint8_t fullScaleRange);
+        uint8_t getFullScaleRange();
 
         ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0);
 

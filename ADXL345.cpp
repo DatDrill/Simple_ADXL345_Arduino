@@ -85,6 +85,146 @@ ADXL345::ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0)
     {
         Wire.begin();
     }
+
+void ADXL345::setDataRate(float dataRate)
+{
+    uint8_t buffer;
+    sendDebugMessage("INFO", "Setting Output Data Rate to " + String(dataRate));
+
+    if(dataRate == 6.25) buffer = 0b0110;
+    else if(dataRate == 12.5) buffer = 0b0111;
+    else if(dataRate == 25) buffer = 0b1000;
+    else if(dataRate == 50) buffer = 0b1001;
+    else if(dataRate == 100) buffer = 0b1010;
+    else if(dataRate == 200) buffer = 0b1011;
+    else if(dataRate == 400) buffer = 0b1100;
+    else if(dataRate == 800) buffer = 0b1101;
+    else if(dataRate == 1600) buffer = 0b1110;
+    else if(dataRate == 3200) buffer = 0b1111;
+    else
+    {
+        buffer = 0b1111;
+        sendDebugMessage("WARNING", "Invalid input. Setting output data rate to 3200Hz (default)");
+    }
+
+    buffer |= (readReg(ADXL345_REG_BW_RATE) & !0x0F);
+    sendDebugMessage("INFO", "Writing to register " + String(ADXL345_REG_BW_RATE) + " the data " + String(buffer, HEX));
+    writeReg(ADXL345_REG_BW_RATE, buffer);
+}
+
+float ADXL345::getDataRate()
+{
+    float dataRate;
+    uint8_t buff;
+
+    buff = readReg(ADXL345_REG_BW_RATE) & 0x0F;
+
+    switch(buff)
+    {
+        case 0b0110:
+            dataRate = 6.25;
+            break;
+
+        case 0b0111:
+            dataRate = 12.5;
+            break;
+
+        case 0b1000:
+            dataRate =  25;
+            break;
+
+        case 0b1001:
+            dataRate =  50;
+            break;
+
+        case 0b1010:
+            dataRate =  100;
+            break;
+
+        case 0b1011:
+            dataRate =  200;
+            break;
+
+        case 0b1100:
+            dataRate =  400;
+            break;
+
+        case 0b1101:
+            dataRate =  800;
+            break;
+
+        case 0b1110:
+            dataRate =  1600;
+            break;
+
+        case 0b1111:
+            dataRate =  3200;
+            break;
+    }
+
+    return dataRate;
+}
+
+void ADXL345::setFullScaleRange(uint8_t fullScaleRange)
+{
+    uint8_t buffer;
+    sendDebugMessage("INFO", "Setting Full Scale Range to " + String(fullScaleRange) + "G");
+
+    switch(fullScaleRange)
+    {
+        case 2:
+            buffer = 0b00;
+            break;
+
+        case 4:
+            buffer = 0b01;
+            break;
+
+        case 8:
+            buffer = 0b10;
+            break;
+
+        case 16:
+            buffer = 0b11;
+            break;
+
+        default:
+            sendDebugMessage("WARNING", "Invalid input. Setting output range to 2G (default)");
+            buffer = 0b00;
+            break;
+    }
+    buffer |= readReg(ADXL345_REG_DATA_FORMAT) & !0x03;
+    sendDebugMessage("INFO", "Writing to register " + String(ADXL345_REG_DATA_FORMAT) + " the data " + String(buffer, HEX));
+    writeReg(ADXL345_REG_DATA_FORMAT, buffer);
+}
+
+uint8_t ADXL345::getFullScaleRange()
+{
+    uint8_t range;
+    uint8_t buff;
+    buff = readReg(ADXL345_REG_DATA_FORMAT) & 0x03;
+
+    switch(buff)
+        {
+            case 0b00:
+                range = 2;
+                break;
+
+            case 0b01:
+                range = 4;
+                break;
+
+            case 0b10:
+                range = 8;
+                break;
+
+            case 0b11:
+                range = 16;
+                break;
+        }
+    return range;
+}
+
 void ADXL345::powerOn()
 {
     uint8_t buffer;
