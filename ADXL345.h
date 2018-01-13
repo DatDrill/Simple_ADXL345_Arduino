@@ -60,6 +60,7 @@ class ADXL345
 
 
         /* Misc */
+        uint8_t getDeviceId();
         void enableDebug();
         void disableDebug();
         bool isDebugEnabled();
@@ -82,5 +83,4 @@ class ADXL345
 };
 
 
-#endif
 #endif /* LIB_ADXL345_H_ */

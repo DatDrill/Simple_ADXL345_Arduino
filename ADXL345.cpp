@@ -280,9 +280,22 @@ void ADXL345::powerOff()
     buffer = readReg(ADXL345_REG_POWER_CTL) & !ADXL345_BIT_PWR_REG_MEASURE;
     writeReg(ADXL345_REG_POWER_CTL, buffer);
 }
+
+
+uint8_t ADXL345::getDeviceId()
+{
+    sendDebugMessage("INFO", "Getting the device ID.");
+    uint8_t buffer = readReg(ADXL345_REG_DEVID);
+    if(buffer == ADXL345_BYTE_DEVICE_ID)
+    {
+        sendDebugMessage("INFO", "Expected device ID");
+    }
+    else
+    {
+        sendDebugMessage("ERROR", "Can't get the expected device ID. Expected: " + String(ADXL345_BYTE_DEVICE_ID, HEX) + " Read: " + String(buffer));
+    }
+    return buffer;
 }
-
-
 
 void ADXL345::enableDebug()
 {
