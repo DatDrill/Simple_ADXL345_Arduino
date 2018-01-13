@@ -85,6 +85,21 @@ ADXL345::ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0)
     {
         Wire.begin();
     }
+void ADXL345::powerOn()
+{
+    uint8_t buffer;
+    sendDebugMessage("INFO", "Turning sensor on. Starting acceleration sampling");
+    buffer = readReg(ADXL345_REG_POWER_CTL) | ADXL345_BIT_PWR_REG_MEASURE;
+    writeReg(ADXL345_REG_POWER_CTL, buffer);
+}
+
+void ADXL345::powerOff()
+{
+    uint8_t buffer;
+    sendDebugMessage("INFO", "Turning sensor off. Halting acceleration sampling");
+    buffer = readReg(ADXL345_REG_POWER_CTL) & !ADXL345_BIT_PWR_REG_MEASURE;
+    writeReg(ADXL345_REG_POWER_CTL, buffer);
+}
 }
 
 

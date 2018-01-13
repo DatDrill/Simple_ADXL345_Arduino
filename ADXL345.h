@@ -39,6 +39,10 @@ class ADXL345
 {
     public:
 
+        /* Power options functions */
+        void powerOn();
+        void powerOff();
+
         ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0);
 
 
