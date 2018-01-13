@@ -52,6 +52,11 @@ class ADXL345
         void setFullScaleRange(uint8_t fullScaleRange);
         uint8_t getFullScaleRange();
 
+        int16_t readX();
+        int16_t readY();
+        int16_t readZ();
+
+        void readAllAxes(int16_t *px, int16_t *py, int16_t *pz);
 
 
         /* Misc */

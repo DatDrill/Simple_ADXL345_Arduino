@@ -96,6 +96,35 @@ ADXL345::ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0, bool debug=false, Str
     }
 }
 
+int16_t ADXL345::readX()
+{
+    int16_t buffer;
+    readRegs(ADXL345_REG_DATAX0, (uint8_t *) &buffer, 2);
+    return buffer;
+}
+
+int16_t ADXL345::readY()
+{
+    int16_t buffer;
+    readRegs(ADXL345_REG_DATAY0, (uint8_t *) &buffer, 2);
+    return buffer;
+}
+
+int16_t ADXL345::readZ()
+{
+    int16_t buffer;
+    readRegs(ADXL345_REG_DATAZ0, (uint8_t *) &buffer, 2);
+    return buffer;
+}
+
+void ADXL345::readAllAxes(int16_t *x, int16_t *y, int16_t *z)
+{
+    int16_t buffer[3];
+    readRegs(ADXL345_REG_DATAX0, (uint8_t *) buffer, 6);
+    *x = buffer[0];
+    *y = buffer[1];
+    *z = buffer[2];
+}
 
 void ADXL345::setDataRate(float dataRate)
 {
