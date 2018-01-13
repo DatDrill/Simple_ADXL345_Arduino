@@ -39,10 +39,12 @@ class ADXL345
 {
     public:
 
+        ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0, bool debug=false, Stream *serialDebugPort=&Serial);
+
         /* Power options functions */
         void powerOn();
         void powerOff();
- 
+
         /* Sensor core functionalities configuration functions */
         void setDataRate(float dataRate);
         float getDataRate();
@@ -50,13 +52,24 @@ class ADXL345
         void setFullScaleRange(uint8_t fullScaleRange);
         uint8_t getFullScaleRange();
 
-        ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0);
 
+
+        /* Misc */
+        void enableDebug();
+        void disableDebug();
+        bool isDebugEnabled();
+
+        void setSerialDebugPort(Stream *port);
 
     protected:
         /* Sensor data access */
         ADXL345_COMM_t communicationType = ADXL345_COMM_I2C;
         uint8_t _csPin;
+
+        Stream *debugPort = &Serial;
+        bool isDebugEnabledFlag = false;
+
+        void sendDebugMessage(String tag, String data);
 
         void writeReg(uint8_t reg_addr, uint8_t data);
         uint8_t readReg(uint8_t reg_addr);

@@ -69,13 +69,17 @@
 #define ADXL345_I2C_ADDRESS             0x53
 
 
-ADXL345::ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0)
+ADXL345::ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0, bool debug=false, Stream *serialDebugPort=&Serial)
 {
     communicationType = commType;
+    isDebugEnabledFlag = debug;
+    debugPort = serialDebugPort;
+
     _csPin = csPin;
 
     if(communicationType == ADXL345_COMM_SPI)
     {
+        sendDebugMessage("INFO", "Communication type: SPI");
         SPI.begin();
         SPI.setDataMode(SPI_MODE3);
         pinMode(csPin, OUTPUT);
@@ -83,8 +87,15 @@ ADXL345::ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0)
     }
     else if(communicationType == ADXL345_COMM_I2C)
     {
+        sendDebugMessage("INFO", "Communication type: I2C");
         Wire.begin();
     }
+    else
+    {
+        sendDebugMessage("ERROR", "Invalid communication type.");
+    }
+}
+
 
 void ADXL345::setDataRate(float dataRate)
 {
@@ -243,6 +254,35 @@ void ADXL345::powerOff()
 }
 
 
+
+void ADXL345::enableDebug()
+{
+    isDebugEnabledFlag = true;
+}
+
+void ADXL345::disableDebug()
+{
+    isDebugEnabledFlag = false;
+}
+
+bool ADXL345::isDebugEnabled()
+{
+    return isDebugEnabledFlag;
+}
+
+void ADXL345::sendDebugMessage(String tag, String data)
+{
+    if(isDebugEnabledFlag && debugPort != NULL)
+    {
+        debugPort->print("[ADXL345][" + tag + "]: ");
+        debugPort->println(data);
+    }
+}
+
+void ADXL345::setSerialDebugPort(Stream *port)
+{
+    debugPort = port;
+}
 
 void ADXL345::writeReg(uint8_t regAddr, uint8_t data)
 {
