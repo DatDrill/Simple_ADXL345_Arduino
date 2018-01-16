@@ -69,7 +69,7 @@
 #define ADXL345_I2C_ADDRESS             0x53
 
 
-ADXL345::ADXL345(ADXL345_COMM_t commType, uint8_t csPin=0, bool debug=false, Stream *serialDebugPort=&Serial)
+ADXL345::ADXL345(ADXL345_COMM_t commType, uint8_t csPin, bool debug, Stream *serialDebugPort)
 {
     communicationType = commType;
     isDebugEnabledFlag = debug;
