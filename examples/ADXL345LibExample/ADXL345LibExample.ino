@@ -3,7 +3,7 @@
  *
  * MIT License
  *
- * Copyright (c) 2017 SGN Robotica Educacional
+ * Copyright (c) 2018 SGN Robotica Educacional
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include <ADXL345.h>
+#include <Simple_ADXL345.h>
 
 /* NOTE: Don't forget to use Serial.begin() when activating the debug mode */
 

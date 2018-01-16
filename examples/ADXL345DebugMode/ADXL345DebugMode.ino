@@ -1,4 +1,4 @@
-#include <ADXL345.h>
+#include <Simple_ADXL345.h>
 
 /* Starting the sensor in the I2C mode */
 ADXL345 adxl(ADXL345_COMM_I2C, 0, true);

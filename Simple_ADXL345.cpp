@@ -27,7 +27,7 @@
 #include <Wire.h>
 #include <SPI.h>
 
-#include "ADXL345.h"
+#include "Simple_ADXL345.h"
 
 /********************** Sensor registers *******************/
 #define ADXL345_REG_DEVID               0x00  // Device ID.

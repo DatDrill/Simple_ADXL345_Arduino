@@ -1,4 +1,4 @@
-#include <ADXL345.h>
+#include <Simple_ADXL345.h>
 
 /* Using microseconds because for higher sampling
    frequencies the millis() won't be enough

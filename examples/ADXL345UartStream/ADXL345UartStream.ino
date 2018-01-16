@@ -1,4 +1,4 @@
-#include <ADXL345.h>
+#include <Simple_ADXL345.h>
 
 #define ADXL345_SPI_CS_PIN 5
 

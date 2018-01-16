@@ -1,3 +1,6 @@
+# Include
+Simple_ADXL345	KEYWORD1
+
 # Classes
 ADXL345	KEYWORD1
 
