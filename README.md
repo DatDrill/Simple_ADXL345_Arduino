@@ -58,6 +58,7 @@ ADXL345 adxl(ADXL345_COMM_I2C, 0, true, &Serial2); // Enabling the debug on Seri
 ``` 
 
 * powerOn()
+
 When powered on, the sensor is converting acceleration data and storing it on it's memory.
 You can use the configuration commands before or after powering on.
 
@@ -67,6 +68,7 @@ Usage:
 ``` 
 
 * powerOff()
+
 Stops the acceleration conversion.
 
 Usage:
@@ -74,6 +76,7 @@ Usage:
     adxl.powerOff();
 ``` 
 * setDataRate(float dataRate) / getDataRate()
+
 These functions are used for setting or reading the current the output data rate, also named sampling frequency.
 The table below lists the available output data rates and the required value to be set as dataRate parameter:
 
@@ -99,6 +102,7 @@ Usage:
 ``` 
 
 * setFullScaleRange(uint8_t fullScaleRange) / getFullScaleRange()
+
 These functions are used to set or get the acceleration that corresponds the sensor full scale. 
 The ADXL345 accelerometer has a 10 bit resolution, so it's output values may vary from 512 to -511.
 If you don't set it or if you choose an invalid value, the default value will be 2G.
@@ -117,6 +121,7 @@ Usage:
   int range = adxl.getFullScaleRange();
 ``` 
 * readX(), readY(), readZ()
+
 These functions are used to read the acceleration. Each axis has an own function. The read values are relative to the current configured full scale range.
 
 Usage:
@@ -127,7 +132,9 @@ Usage:
   y = adxl.readY();
   z = adxl.readZ();
 ``` 
+
 * getDeviceId()
+
 This function returns the device ID byte. On this sensor, the device ID is 0xE5h. It's useful to detect if the sensor is working.
 
 Usage:
@@ -136,6 +143,7 @@ byte devId = adxl.getDeviceId();
 ``` 
 
 * enableDebug(), disableDebug(), isDebugEnabled()
+
 Enable, disable or check if the debug through the serial port is enabled.
 
 Usage:
@@ -145,6 +153,7 @@ Usage:
   bool debug = adxl.isDebugEnabled(); // Check if the debug is enabled
 ``` 
 * setSerialDebugPort(Stream *port)
+
 Set the serial port used for debug.
 
 Usage:
