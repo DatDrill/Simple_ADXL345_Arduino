@@ -1,0 +1,26 @@
+# Classes
+ADXL345	KEYWORD1
+
+# Data types
+ADXL345_COMM_t	KEYWORD3
+
+# Constants
+ADXL345_COMM_I2C	LITERAL1
+ADXL345_COMM_SPI	LITERAL1
+
+# Functions
+powerOn	KEYWORD2
+powerOff	KEYWORD2
+setDataRate	KEYWORD2
+getDataRate	KEYWORD2
+setFullScaleRange	KEYWORD2
+getFullScaleRange	KEYWORD2
+readX	KEYWORD2
+readY	KEYWORD2
+readZ	KEYWORD2
+readAllAxes	KEYWORD2
+getDeviceId	KEYWORD2
+enableDebug	KEYWORD2
+disableDebug	KEYWORD2
+isDebugEnabled	KEYWORD2
+setSerialDebugPort	KEYWORD2
