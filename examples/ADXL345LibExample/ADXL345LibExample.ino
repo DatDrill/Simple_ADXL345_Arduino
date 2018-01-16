@@ -46,10 +46,12 @@
 
 */
 
+#define ADXL345_SPI_CS_PIN 5
+
 /* Using sensor on SPI mode */
-// ADXL345 adxl(ADXL345_COMM_SPI, 5); // Normal mode
-// ADXL345 adxl(ADXL345_COMM_SPI, 5, true); // Debug messages enabled
-// ADXL345 adxl(ADXL345_COMM_SPI, 5, true, &Serial2); // Enabling the debug on Serial2 port
+// ADXL345 adxl(ADXL345_COMM_SPI, ADXL345_SPI_CS_PIN); // Normal mode
+// ADXL345 adxl(ADXL345_COMM_SPI, ADXL345_SPI_CS_PIN, true); // Debug messages enabled
+// ADXL345 adxl(ADXL345_COMM_SPI, ADXL345_SPI_CS_PIN, true, &Serial2); // Enabling the debug on Serial2 port
 
 /* Using sensor on I2C mode */
 ADXL345 adxl(ADXL345_COMM_I2C); // Normal mode
